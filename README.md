@@ -140,7 +140,10 @@ We will use GITLAB registry to Build a image for the web application and push it
 
  ### POD
 ![Before Rollout](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Before%20Rollout-1.png)  
-  
+
+- After every build of the pipeline, You will get a message via Mail weather you have successfully passed all the stages in the pipeline or your pipeline got failed
+
+![Mail](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Mail.png)  
 
 
 <!-- Task 3 -->
