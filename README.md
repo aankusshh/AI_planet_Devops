@@ -184,7 +184,7 @@ After the duration of the canary release, all previous release pods will be term
 ## Task 4: Documentation and Cleanup
 
 ### Challenges
-1. I have worked on ArgoCD before on my local machine but Today I have tried on VM
+**Challenge 1.** I have worked on ArgoCD before on my local machine but Today I have tried on VM
    - So What I used to do is change the configuration of **argocd-server**
      ```
        kubectl get all -A
@@ -194,7 +194,7 @@ After the duration of the canary release, all previous release pods will be term
      - Change type from **type: ClusterIP** to **type: Nodeport or LoadBalancer**
 ![NodePort](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Error%203.png)  
     
-2. I used these commands also
+**Challenge 2.** I used these commands also
   ```
       minikube service list -n argocd
       # it will provide us with a URL but I was also giving timeout error
@@ -209,7 +209,7 @@ After the duration of the canary release, all previous release pods will be term
 ![NodePort](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Error%202.png)  
 
 
-### Answer
+### Solution
 Finally got answer via port-forwarding
 ```
 kubectl port-forward svc/argocd-server -n argocd --address 0.0.0.0 8080:443
@@ -218,11 +218,13 @@ Now we can access ArgoCD via <InstanceIP>:8080 port
 ![ArgoCD](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/ARGO%20RUNNING.png)  
 
 
-3. Also got an major error in setting up SSH_Private_key in 
+**Challenge 3.** Also got an major error in setting up SSH_Private_key in 
 ![Pipeline Error](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Pipeline%20Error.png) 
   - Without SSH the private repository can't be cloned
   - So, we have to set SSH and than make a pipeline for cloning
 
+
+### Solution
 ### Adding SSH public key in git
 ![SSH public key](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Screenshot%202024-04-27%20005827.png) 
 
