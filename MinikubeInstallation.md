@@ -41,7 +41,7 @@ $ minikube start
 $ kubectl cluster-info
 ```
 
-Check Minikube status
+### Check Minikube status
 ```
 $ minikube status
 $ kubectl get nodes
