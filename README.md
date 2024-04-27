@@ -41,7 +41,9 @@ Specification
 - Type: t2,large (We are going to run Argocd, Argo rollout, Docker and Minikube on it)
 - Create a key pair
 - Storage: 25 GB
+
   ![EC2](Images/EC2.png)
+  
 - [Install Docker and Minikube](https://github.com/aankusshh/AI_planet_Devops/tree/main/MinikubeInstallation.md)
 - Install ArdoCD
   ```
