@@ -29,7 +29,7 @@ The project involves setting up a GitOps pipeline to automate the deployment and
 and
 We are going to do the whol Project using VM's and GitOPs Concepts
 
-### Creating an EC2 instance in AWS Console
+### Creating an EC2 instance in AWS Console and Installing Dependencies
 Specification
 - Image: Ubuntu 22.04
 - Type: t2,large (We are going to run Argocd, Argo rollout, Docker and Minikube on it)
@@ -63,6 +63,20 @@ Specification
   ```
   It will Create a namespace -> argo-rollouts
   and install dependencies for argocd
+
+## Setting Up GITLAB or GITHUB
+For this project we are using GitLab for following purpose:
+- For storing code (Use as repository)
+- For Making CICD Pipeline (or we can say perticularly CI pipeline, CD we will do with ArgCD)
+  we can aslo use the jenkins for the same purpose, but I thougth as it is a gitops project so why not use git tools as much as we can.
+- As Image registry.
+
+### Steps
+- Make two repository
+  - [AIP_code_Repo](https://github.com/aankusshh/AI_planet_Devops/tree/main/AIP_code_Repo) (For Storing the application related code, making CI Pipeline and storing Dockerfile )
+  - [API_manifest_repo](https://github.com/aankusshh/AI_planet_Devops/tree/main/API_manifest_repo) (For storing manifest files.)
+
+You can check those directory just by clicking on above names.
 
 
   
