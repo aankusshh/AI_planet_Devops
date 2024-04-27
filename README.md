@@ -105,6 +105,7 @@ We will use GITLAB registry to Build a image for the web application and push it
 
 ![Pipeline](Images/Pipeline.png)
 
+
 ### Successfully passed Pipeline
 ![Pipeline](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Passes%20Pipeline.png)
 
