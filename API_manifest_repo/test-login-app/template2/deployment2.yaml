@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: myapp-rollouts
+spec:
+  strategy:
+    canary:
+      steps:
+        - setWeight: 20
+        - pause: {}
+        - setWeight: 40
+        - pause: {duration: 10}
+        - setWeight: 60
+        - pause: {duration: 10}
+        - setWeight: 80
+        - pause: {duration: 10}
+  revisionHistoryLimit: 2 
+  selector:
+    matchLabels:
+      app: myapp-rollout
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: myapp-rollout
+    spec:
+      containers:
+      - name: myapp-rollout
+        image: nikhilp047/todoapp:0a0a0962fe72b204864d4c1124858831031be951
+        ports:
+        - containerPort: 8080 #test
