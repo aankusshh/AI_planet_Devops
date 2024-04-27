@@ -247,6 +247,10 @@ kubectl delete namespace argo-rollouts
 ## Application Deployment
 ![Deployment](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Application.png) 
 
+
+## Conclusion
+In conclusion, I extend my sincere gratitude to the AI Planet team for entrusting me with this enriching opportunity. While I had prior experience with ArgoCD to some extent but I mostly use jenkins for CICD pipeline. It was quite a differnt task from my day to day routine, I have also used gitlab and gitlab registry for the first time to make it more interesting and challenging.
+This experience has not only expanded my technical skills but also instilled in me a sense of confidence and excitement for future opportunities in the field of DevOps. I am eager to continue growing and contributing to innovative projects like this one, and I am thankful for the knowledge and experience gained during this journey.
   
 
   
