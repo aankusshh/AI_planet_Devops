@@ -24,7 +24,7 @@ This repo contains the kubernetes and Argo manifestaions, including ArgoCD Appli
   - Document the Process: Write a summary of the steps you took, including any challenges you encountered and how you resolved them.
   - Clean Up: Describe how to cleanly remove all resources created during this assignment from the Kubernetes cluster.
 
-# Task 1
+# Task 1: Setup and Configuration
 The project involves setting up a GitOps pipeline to automate the deployment and management of a simple web application. utilizing Argo CD for continuous deployment and Argo Rollouts for advanced deployment strategies within a Kubernetes environment.
 and
 We are going to do the whol Project using VM's and GitOPs Concepts
@@ -35,7 +35,7 @@ Specification
 - Type: t2,large (We are going to run Argocd, Argo rollout, Docker and Minikube on it)
 - Create a key pair
 - Storage: 25 GB
-- Install Docker and Minikube.
+- [Install Docker and Minikube](https://github.com/aankusshh/AI_planet_Devops/tree/main/MinikubeInstallation.md)
 - Install ArdoCD
   ```
   kubectl create namespace argocd
@@ -78,6 +78,73 @@ For this project we are using GitLab for following purpose:
 
 You can check those directory just by clicking on above names.
 
+
+# Task 2: Creating the GitOps Pipeline
+To deploy an application using GitOps pipeline, we first need an application. Then we convert it to a image and push it to a registry such as GIT Registry
+We will use GITLAB registry to Build a image for the web application and push it to a public container registry.
+
+## Steps In Pipeline
+- Build Image
+  Image link : https://gitlab.com/aankusshh/AIP_code_Repo/container_registry
+- Update Helm chart
+  - run ssh agent
+  - add ssh key stored in SSH_PRIVATE_KEY variable to the agent store
+  - Configure Git
+- Update Image Tag
+
+## Creating the app with Argo CD
+- Open ArgoCD dashboard on <instanceIP>:8080
+- Go to setting -> Repository > Connect repo
+  - Choose your connection method: via HTTPS
+  - Type: git
+  - Project: default
+  - Repository URL: https://gitlab.com/aankusshh/API_manifest_repo.git
+  - Click on Connect
+- Go to Application -> New App
+  - Application: <Name of the app you want>
+  - Project: Default
+  - SYNC POLICY: Automatic (you can also choose Manual but I personally like Automantic for convenience)
+  - SOURCE
+    - Repository URL: <Project URL>
+    - Revision: Head
+    - Path: Path of the Directory in repo
+  - DESTINATION
+    - Cluster URL: https://kubernetes.default.svc
+    - Namespace: Provide namespave where you want to deploy the application
+
+  Now we will see that the application have been deployed.
+
+## Task 3: Implementing a Canary Release with Argo Rollouts
+
+### Canary Rollout Strategy Release
+The first rollout is the intial rollout so it will create pods normally. The subsequent rollouts will be following the Canary release strategy which we had defined in deployment.yaml
+```
+kind: Rollout
+metadata:
+  name: myapp-rollouts
+spec:
+  strategy:
+    canary:
+      steps:
+        - setWeight: 20
+        - pause: {}
+        - setWeight: 40
+        - pause: {duration: 10}
+        - setWeight: 60
+        - pause: {duration: 10}
+        - setWeight: 80
+        - pause: {duration: 10}
+```
+The strategy will follow the below steps:
+
+We redirect 20% of the traffic to our new version The remaining 80% remains with the previous release
+Before it moves to the next step it will wait for human Intervention we will have to promote our deployment to the next step
+Then 40% of requests to our new version
+Then 60% after waiting for 10 seconds
+Then 80% after 10 seconds
+At the end, 100% of the traffic is directed towards the new version of pods
+  
+  
 
   
 
