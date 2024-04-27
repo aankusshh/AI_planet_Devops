@@ -1,8 +1,9 @@
 ### Update Ubuntu packages install required package for this lab
-'''
+
+```
 $ sudo apt-get update -y
 $ sudo apt-get install apt-transport-https curl conntrack
-'''
+```
 
 ### Install Docker
 '''bash
