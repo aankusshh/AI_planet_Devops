@@ -135,7 +135,7 @@ We will use GITLAB registry to Build a image for the web application and push it
  ### Status: Healthy and Synced
  ![Healthy and Synced](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Healthy.png)
 
- Now we will see that the application have been deployed.
+ **Now we will see that the application have been deployed.**
   ![Before Rollout](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Before%20Rollout.png)
 
  ### POD
@@ -190,6 +190,7 @@ After the duration of the canary release, all previous release pods will be term
        kubectl get all -A
        kubectl edit service argocd-server -n argocd
      ```
+     
      - Change type from **type: ClusterIP** to **type: Nodeport or LoadBalancer**
 ![NodePort](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Error%203.png)  
     
@@ -201,7 +202,10 @@ After the duration of the canary release, all previous release pods will be term
       minikube tunnel
       # it will also provide us with a tunnelled URL but I was also giving timeout error
 ```
+
 ![NodePort](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Error%201.png)  
+
+
 ![NodePort](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Error%202.png)  
 
 
