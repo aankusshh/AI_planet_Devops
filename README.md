@@ -41,6 +41,7 @@ Specification
 - Type: t2,large (We are going to run Argocd, Argo rollout, Docker and Minikube on it)
 - Create a key pair
 - Storage: 25 GB
+  ![EC2](Images/EC2.png)
 - [Install Docker and Minikube](https://github.com/aankusshh/AI_planet_Devops/tree/main/MinikubeInstallation.md)
 - Install ArdoCD
   ```
@@ -84,6 +85,8 @@ For this project we are using GitLab for following purpose:
 
 You can check those directory just by clicking on above names.
 
+![Project Repos](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Project%20Repos.png)
+
 <!-- Task 2 -->
 # Task 2: Creating the GitOps Pipeline
 To deploy an application using GitOps pipeline, we first need an application. Then we convert it to a image and push it to a registry such as GIT Registry
@@ -98,6 +101,13 @@ We will use GITLAB registry to Build a image for the web application and push it
   - Configure Git
 - Update Image Tag
 
+![Pipeline](Images/Pipeline.png)
+
+### Successfully passed Pipeline
+![Pipeline](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Passes%20Pipeline.png)
+
+
+
 ## Creating the app with Argo CD
 - Open ArgoCD dashboard on <instanceIP>:8080
 - Go to setting -> Repository > Connect repo
@@ -106,6 +116,7 @@ We will use GITLAB registry to Build a image for the web application and push it
   - Project: default
   - Repository URL: https://gitlab.com/aankusshh/API_manifest_repo.git
   - Click on Connect
+![Repo Connect](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Argo%20Connect%20Repo.png)
 - Go to Application -> New App
   - Application: <Name of the app you want>
   - Project: Default
@@ -118,7 +129,15 @@ We will use GITLAB registry to Build a image for the web application and push it
     - Cluster URL: https://kubernetes.default.svc
     - Namespace: Provide namespave where you want to deploy the application
 
-  Now we will see that the application have been deployed.
+ ### Status: Healthy and Synced
+ ![Healthy and Synced](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Healthy.png)
+
+ Now we will see that the application have been deployed.
+  ![Before Rollout](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Before%20Rollout.png)
+
+ ### POD
+![Before Rollout](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Before%20Rollout-1.png)  
+  
 
 
 <!-- Task 3 -->
@@ -153,6 +172,8 @@ The strategy will follow the below steps:
 
 Commit and pushing to the repo will automatically update the kubernetes deployments with the help of Argo CD's synchronization.
 
+![After Rollout](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/After%20Rollout.png)  
+
 After the duration of the canary release, all previous release pods will be terminated and the result is a successful release of new version.
 
 
@@ -167,6 +188,7 @@ After the duration of the canary release, all previous release pods will be term
        kubectl edit service argocd-server -n argocd
      ```
      - Change type from **type: ClusterIP** to **type: Nodeport or LoadBalancer**
+![NodePort](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Error%203.png)  
     
 2. I used these commands also
   ```
@@ -176,6 +198,9 @@ After the duration of the canary release, all previous release pods will be term
       minikube tunnel
       # it will also provide us with a tunnelled URL but I was also giving timeout error
 ```
+![NodePort](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Error%201.png)  
+![NodePort](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Error%202.png)  
+
 
 ### Answer
 Finally got answer via port-forwarding
@@ -183,12 +208,20 @@ Finally got answer via port-forwarding
 kubectl port-forward svc/argocd-server -n argocd --address 0.0.0.0 8080:443
 ```
 Now we can access ArgoCD via <InstanceIP>:8080 port
+![ArgoCD](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/ARGO%20RUNNING.png)  
 
 
-3. Also got an major error in setting up SSH_Private_key in pipeline
+3. Also got an major error in setting up SSH_Private_key in 
+![Pipeline Error](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Pipeline%20Error.png) 
   - Without SSH the private repository can't be cloned
   - So, we have to set SSH and than make a pipeline for cloning
 
+### Adding SSH public key in git
+![SSH public key](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Screenshot%202024-04-27%20005827.png) 
+
+
+### Making SSH_PRIVATE_KEY Variable for Authentication
+![SSH_PRIVATE_KEY](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/SSH_Private_Key.png) 
 
 ## Clean up
 To releas all the resources used in this assignment (argocd app & rollout), I executed the following commands:
@@ -203,6 +236,10 @@ kubectl delete namespace argocd
 
 kubectl delete namespace argo-rollouts
 ```
+
+## Application Deployment
+![Deployment](https://github.com/aankusshh/AI_planet_Devops/blob/main/Images/Application.png) 
+
   
 
   
