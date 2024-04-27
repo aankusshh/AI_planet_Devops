@@ -23,6 +23,9 @@ This repo contains the kubernetes and Argo manifestaions, including ArgoCD Appli
 - ### Task 4
   - Document the Process: Write a summary of the steps you took, including any challenges you encountered and how you resolved them.
   - Clean Up: Describe how to cleanly remove all resources created during this assignment from the Kubernetes cluster.
+ 
+# WorkFlow
+![WorkFlow](Images/WorkFlow.png)
 
 # Task 1: Setup and Configuration
 The project involves setting up a GitOps pipeline to automate the deployment and management of a simple web application. utilizing Argo CD for continuous deployment and Argo Rollouts for advanced deployment strategies within a Kubernetes environment.
@@ -148,6 +151,39 @@ Commit and pushing to the repo will automatically update the kubernetes deployme
 After the duration of the canary release, all previous release pods will be terminated and the result is a successful release of new version.
 
 ## Task 4: Documentation and Cleanup
+
+### Challenges
+1. I have worked on ArgoCD before on my local machine but Today I have tried on VM
+   - So What I used to do is change the configuration of **argocd-server**
+     ```
+       kubectl get all -A
+       kubectl edit service argocd-server -n argocd
+     ```
+     - Change type from **type: ClusterIP** to **type: Nodeport or LoadBalancer**
+    
+2. I used these commands also
+  ```
+      minikube service list -n argocd
+      # it will provide us with a URL but I was also giving timeout error
+
+      minikube tunnel
+      # it will also provide us with a tunnelled URL but I was also giving timeout error
+```
+
+### Answer
+Finally got answer via port-forwarding
+```
+kubectl port-forward svc/argocd-server -n argocd --address 0.0.0.0 8080:443
+```
+Now we can access ArgoCD via <InstanceIP>:8080 port
+
+
+3. Also got an major error in setting up SSH_Private_key in pipeline
+  - Without SSH the private repository can't be cloned
+  - So, we have to set SSH and than make a pipeline for cloning
+
+
+## Clean up
 To releas all the resources used in this assignment (argocd app & rollout), I executed the following commands:
 ```
 kubectl delete -n argocd application myapp-rollout
