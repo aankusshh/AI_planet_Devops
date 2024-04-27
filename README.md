@@ -136,14 +136,30 @@ spec:
         - pause: {duration: 10}
 ```
 The strategy will follow the below steps:
+- We redirect 20% of the traffic to our new version The remaining 80% remains with the previous release
+- Before it moves to the next step it will wait for human Intervention we will have to promote our deployment to the next step
+- Then 40% of requests to our new version
+- Then 60% after waiting for 10 seconds
+- Then 80% after 10 seconds
+- At the end, 100% of the traffic is directed towards the new version of pods.
 
-We redirect 20% of the traffic to our new version The remaining 80% remains with the previous release
-Before it moves to the next step it will wait for human Intervention we will have to promote our deployment to the next step
-Then 40% of requests to our new version
-Then 60% after waiting for 10 seconds
-Then 80% after 10 seconds
-At the end, 100% of the traffic is directed towards the new version of pods
-  
+Commit and pushing to the repo will automatically update the kubernetes deployments with the help of Argo CD's synchronization.
+
+After the duration of the canary release, all previous release pods will be terminated and the result is a successful release of new version.
+
+## Task 4: Documentation and Cleanup
+To releas all the resources used in this assignment (argocd app & rollout), I executed the following commands:
+```
+kubectl delete -n argocd application myapp-rollout
+
+kubectl delete -n argo-rollouts rollout myapp
+```
+And to remove the ArgoCD and Rollouts itself, we can remove their namespaces by executing the following commands:
+```
+kubectl delete namespace argocd
+
+kubectl delete namespace argo-rollouts
+```
   
 
   
