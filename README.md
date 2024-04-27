@@ -7,27 +7,29 @@ This repo contains the kubernetes and Argo manifestaions, including ArgoCD Appli
 
 
 ## Tasks to be Performed
-- ### Task 1
+- ### [Task 1](#toolbox-getting-started)
   - Create a GitRepository: Create a Github repository and host your source code in the same repository.
   - Install Argo CD on Your Kubernetes Cluster: Follow the official Argo CD documentation to install and set up Argo CD.
   - Install Argo Rollouts: Install the Argo Rollouts controller in your Kubernetes cluster, following the official guide.
-- ### Task 2
+- ### [Task 2](#toolbox-getting-started)
   - Dockerize the Application: Build a Docker image for the web application of your choice and push it to a public container registry of your choice.
   - Deploy the Application Using Argo CD:
   - Modify the Kubernetes manifests in your forked repository to use the Docker image you pushed.
   - Set up Argo CD to monitor your repository and automatically deploy changes to your Kubernetes cluster.
-- ### Task 3
+- ### [Task 3](#toolbox-getting-started)
   - Define a Rollout Strategy: Modify the application's deployment to use Argo Rollouts, specifying a canary release strategy in the rollout definition.
   - Trigger a Rollout: Make a change to the application, update the Docker image, push the new version to your registry, and update the rollout definition to use this new image.
   - Monitor the Rollout: Use Argo Rollouts to monitor the deployment of the new version, ensuring the canary release successfully completes.
-- ### Task 4
+- ### [Task 4](#toolbox-getting-started)
   - Document the Process: Write a summary of the steps you took, including any challenges you encountered and how you resolved them.
   - Clean Up: Describe how to cleanly remove all resources created during this assignment from the Kubernetes cluster.
  
 # WorkFlow
 ![WorkFlow](Images/WorkFlow.png)
 
-# Task 1: Setup and Configuration
+Soory For the irregular shapes in flowchart, I was in hurry (Finals exam are going on)
+
+# :toolbox: Task 1: Setup and Configuration
 The project involves setting up a GitOps pipeline to automate the deployment and management of a simple web application. utilizing Argo CD for continuous deployment and Argo Rollouts for advanced deployment strategies within a Kubernetes environment.
 and
 We are going to do the whol Project using VM's and GitOPs Concepts
@@ -82,7 +84,7 @@ For this project we are using GitLab for following purpose:
 You can check those directory just by clicking on above names.
 
 
-# Task 2: Creating the GitOps Pipeline
+# :toolbox: Task 2: Creating the GitOps Pipeline
 To deploy an application using GitOps pipeline, we first need an application. Then we convert it to a image and push it to a registry such as GIT Registry
 We will use GITLAB registry to Build a image for the web application and push it to a public container registry.
 
@@ -117,7 +119,7 @@ We will use GITLAB registry to Build a image for the web application and push it
 
   Now we will see that the application have been deployed.
 
-## Task 3: Implementing a Canary Release with Argo Rollouts
+## :toolbox: Task 3: Implementing a Canary Release with Argo Rollouts
 
 ### Canary Rollout Strategy Release
 The first rollout is the intial rollout so it will create pods normally. The subsequent rollouts will be following the Canary release strategy which we had defined in deployment.yaml
@@ -150,7 +152,7 @@ Commit and pushing to the repo will automatically update the kubernetes deployme
 
 After the duration of the canary release, all previous release pods will be terminated and the result is a successful release of new version.
 
-## Task 4: Documentation and Cleanup
+## :toolbox: Task 4: Documentation and Cleanup
 
 ### Challenges
 1. I have worked on ArgoCD before on my local machine but Today I have tried on VM
