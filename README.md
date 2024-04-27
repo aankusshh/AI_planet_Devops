@@ -24,3 +24,56 @@ This repo contains the kubernetes and Argo manifestaions, including ArgoCD Appli
   - Document the Process: Write a summary of the steps you took, including any challenges you encountered and how you resolved them.
   - Clean Up: Describe how to cleanly remove all resources created during this assignment from the Kubernetes cluster.
 
+# Task 1
+The project involves setting up a GitOps pipeline to automate the deployment and management of a simple web application. utilizing Argo CD for continuous deployment and Argo Rollouts for advanced deployment strategies within a Kubernetes environment.
+and
+We are going to do the whol Project using VM's and GitOPs Concepts
+
+### Creating an EC2 instance in AWS Console
+Specification
+- Image: Ubuntu 22.04
+- Type: t2,large (We are going to run Argocd, Argo rollout, Docker and Minikube on it)
+- Create a key pair
+- Storage: 25 GB
+- Install Docker and Minikube.
+- Install ArdoCD
+  ```
+  kubectl create namespace argocd
+  kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+  ```
+  It will Create a namespace -> argocd
+  and install dependencies for argocd
+### Retrieving Password
+```
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+
+username: admin
+password: will be retrived from above code
+```
+### Tunneling Route
+```
+kubectl port-forward svc/argocd-server -n argocd --address 0.0.0.0 8080:443
+```
+Now, we can access the ArgoCD via <InstanceIP>:8080
+
+- Install ArgoRollout
+  ```
+  kubectl create namespace argo-rollouts
+  kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
+  ```
+  It will Create a namespace -> argo-rollouts
+  and install dependencies for argocd
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
