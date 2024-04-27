@@ -27,7 +27,7 @@ This repo contains the kubernetes and Argo manifestaions, including ArgoCD Appli
 # WorkFlow
 ![WorkFlow](Images/WorkFlow.png)
 
-Soory For the irregular shapes in flowchart, I was in hurry (Finals exam are going on)
+Sorry For the irregular shapes in flowchart, I was in hurry (Finals exam are going on)
 
 <!-- Task 1 -->
 # Task 1: Setup and Configuration
